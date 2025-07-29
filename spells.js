@@ -2,7 +2,7 @@
 
 const spellMap = {
   // ✨ Utility / Light Magic
-  "lumoss": { color: "#ffffff" },
+  "luminous": { color: "#ffffff" },
   "noks": { color: "#888888" },
   "aseeo": { color: "#3399ff" },
   "alohomorra": { color: "#00cc66" },

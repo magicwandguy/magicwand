@@ -1,0 +1,44 @@
+const spellMap = {
+  "lumos": { color: "white", size: 200 },
+  "expelliarmus": { color: "red", size: 300 },
+  "stupefy": { color: "blue", size: 250 },
+  "avada kedavra": { color: "green", size: 400 },
+  "protego": { color: "gold", size: 220 }
+};
+
+function startListening() {
+  const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  recognition.lang = 'en-US';
+  recognition.start();
+
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript.toLowerCase();
+    console.log("You said:", transcript);
+    handleSpell(transcript);
+  };
+
+  recognition.onerror = (err) => {
+    alert("Speech recognition error: " + err.error);
+  };
+}
+
+function handleSpell(spell) {
+  const effect = spellMap[spell];
+  if (!effect) {
+    alert("Unknown spell: " + spell);
+    return;
+  }
+
+  const effectEl = document.getElementById("spellEffect");
+  effectEl.style.background = effect.color;
+  effectEl.style.width = `${effect.size}px`;
+  effectEl.style.height = `${effect.size}px`;
+  effectEl.style.opacity = 1;
+  effectEl.style.transition = "transform 0.6s ease-out, opacity 0.8s";
+  effectEl.style.transform = "scale(1)";
+
+  setTimeout(() => {
+    effectEl.style.transform = "scale(2)";
+    effectEl.style.opacity = 0;
+  }, 50);
+}

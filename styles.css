@@ -1,0 +1,134 @@
+body {
+  background-color: #0e0e1a;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  overflow: hidden;
+  touch-action: manipulation;
+  height: 100vh;
+}
+
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.wand {
+  width: 180px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.wand:active {
+  transform: scale(1.1);
+}
+
+#spellEffect {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border-radius: 50%;
+  opacity: 0;
+  z-index: 1;
+}
+
+.light-beam {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 12px;
+  height: 100vh;
+  transform: translateX(-50%);
+  background: white;
+  opacity: 0;
+  border-radius: 6px;
+  filter: blur(18px) brightness(2);
+  animation: beamPulse 0.8s ease-out forwards;
+  z-index: 0;
+}
+
+@keyframes beamPulse {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1.05);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0);
+  }
+}
+
+.sparkle {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.7;
+  pointer-events: none;
+  filter: blur(1px) brightness(1.2);
+  animation: sparkleAnim 1.8s ease-out forwards;
+  z-index: 0;
+}
+
+@keyframes sparkleAnim {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(0.4);
+    opacity: 0;
+  }
+}
+
+.background-magic {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.background-magic::before,
+.background-magic::after {
+  content: "";
+  position: absolute;
+  width: 300%;
+  height: 300%;
+  top: -100%;
+  left: -100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 80%);
+  animation: magic-drift 30s linear infinite;
+}
+
+.background-magic::after {
+  animation-delay: 15s;
+  transform: rotate(180deg);
+}
+
+@keyframes magic-drift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(50%, 50%) scale(1.2);
+  }
+}

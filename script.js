@@ -1,7 +1,14 @@
 let recognition;
 
 function setupSpeechRecognition() {
-  recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("Your browser does not support Speech Recognition. Try Chrome or Edge.");
+    return null;
+  }
+
+  recognition = new SpeechRecognition();
   recognition.lang = 'en-US';
   recognition.continuous = false;
 
@@ -13,11 +20,18 @@ function setupSpeechRecognition() {
 
   recognition.onerror = (err) => {
     alert("Speech recognition error: " + err.error);
+    console.error(err);
   };
+
+  return recognition;
 }
 
 function startListening() {
-  if (!recognition) setupSpeechRecognition();
+  if (!recognition) {
+    const initialized = setupSpeechRecognition();
+    if (!initialized) return; // Abort if not supported
+  }
+
   recognition.start();
 }
 

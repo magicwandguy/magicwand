@@ -17,7 +17,7 @@ const spellMap = {
   "lumos maxima": { color: "#ffff99" }, // light yellow
 
   // 🛡️ Defensive Spells
-  "protego": { color: "#ffd700" }, // gold
+  "protahgo": { color: "#ffd700" }, // gold
   "expelliarmus": { color: "#ff0000" }, // red
   "expecto patronum": { color: "#66ccff" }, // icy blue
   "finite incantatem": { color: "#ccccff" }, // light purple
